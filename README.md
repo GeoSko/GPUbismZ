@@ -1,3 +1,14 @@
+# GPUbismZ
+
+**Fork of [CubismZ]** – [https://github.com/phadjido/CubismZ](URL)
+
+This is a fork of CubismZ with added GPU support.
+
+## Forked Modifications:
+- 
+
+## Original README
+
 # CubismZ: A Parallel Data Compression Framework for Large Scale 3D Scientific Data
 
 Related publication: 
