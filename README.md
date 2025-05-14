@@ -1,6 +1,6 @@
 # GPUbismZ
 
-**Fork of [CubismZ]** – [https://github.com/phadjido/CubismZ](URL)
+**Fork of CubismZ** https://github.com/phadjido/CubismZ
 
 This is a fork of CubismZ with added GPU support.
 
