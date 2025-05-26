@@ -6,9 +6,12 @@
 # This source code is licensed under the BSD-style license found in the
 # LICENSE file in the root directory of this source tree.
 #
-.PHONY: clean fpzip sz zfp zlib
 
-all: fpzip lzfour sz zfp zlib
+#File modified by Georgios Skondras
+
+.PHONY: clean fpzip sz zfp zlib zfp_gpu
+
+all: fpzip lzfour sz zfp zlib zfp_gpu
 
 fpzip:
 	$(MAKE) -C fpzip/ CC=$(MPICXX)
@@ -25,6 +28,16 @@ zfp:
 zlib:
 	$(MAKE) -C zlib/
 
+zfp_gpu:
+	mkdir -p zfp_gpu/zfp/builds/build_gpu
+	cd zfp_gpu/zfp/builds/build_gpu && \
+	cmake -DZFP_LIBRARY_PREFIX=gpu -DBUILD_EXAMPLES=OFF -DZFP_WITH_CUDA=ON ../.. && \
+	cmake --build . --config Release
+	mkdir -p build/lib build/include
+	cp -r zfp_gpu/zfp/builds/build_gpu/lib/* build/lib/
+	cp -r zfp_gpu/zfp/include/* build/include/
+
+
 clean:
 	rm -rf build
 	$(MAKE) -C fpzip/ clean
@@ -32,3 +45,4 @@ clean:
 	$(MAKE) -C zfp/ clean
 	$(MAKE) -C zlib/ clean
 	$(MAKE) -C SZ/ clean
+	rm -rf zfp_gpu/zfp/builds/build_gpu  
