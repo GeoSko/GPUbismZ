@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/testzfp.dir/testzfp.cpp.o -o ../bin/testzfp  -Wl,-rpath,/home/gskondras/GPUbismZ/ThirdParty/zfp_gpu/zfp/builds/build_gpu/lib ../lib/libgpuzfp.so.1.0.1 
