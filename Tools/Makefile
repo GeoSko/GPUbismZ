@@ -17,6 +17,7 @@ needs_lz ?= 1
 wavz ?= 0
 fpzip ?= 0
 zfp ?= 0
+zfp_gpu ?= 0
 sz ?= 0
 
 # options for the second compression stage (encoding)
@@ -42,6 +43,11 @@ endif
 ifeq "$(zfp)" "1"
 	CUBISMZFLAGS += -D_USE_ZFP_  -I../ThirdParty/build/include/zfp
 	CUBISMZLIBS += -lzfp
+endif
+
+ifeq "$(zfp_gpu)" "1"
+	CUBISMZFLAGS += -D_USE_ZFP_GPU_  -I../ThirdParty/build/include/zfp_gpu
+	CUBISMZLIBS += -lgpuzfp
 endif
 
 ifeq "$(sz)" "1"

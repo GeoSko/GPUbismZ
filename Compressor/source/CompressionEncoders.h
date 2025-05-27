@@ -36,6 +36,10 @@ extern "C"
 #include "myzfp.h"
 #endif
 
+#if defined(_USE_ZFP_GPU_)
+#include "myzfp_gpu.h"
+#endif
+
 #if defined(_USE_SZ_)
 extern "C"
 {

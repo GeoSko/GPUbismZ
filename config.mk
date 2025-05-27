@@ -58,6 +58,7 @@ tools-only:
 	$(MAKE) -C Tools/ install dir=wavz_zlib wavz=1 zlib=1
 	$(MAKE) -C Tools/ install dir=fpzip fpzip=1
 	$(MAKE) -C Tools/ install dir=zfp zfp=1
+	$(MAKE) -C Tools/ install dir=zfp_gpu zfp_gpu=1
 	$(MAKE) -C Tools/ install dir=sz sz=1
 
 tools-custom:

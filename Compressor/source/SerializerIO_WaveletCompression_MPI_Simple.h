@@ -8,6 +8,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+//  File modified by Georgios Skondras
+
 #ifndef SERIALIZERIO_WAVELETCOMPRESSION_MPI_SIMPLE_H_
 #define SERIALIZERIO_WAVELETCOMPRESSION_MPI_SIMPLE_H_
 #endif
@@ -270,6 +272,33 @@ protected:
 					nbytes = nbytes_zfp;
 #if VERBOSE
 					printf("zfp_compress status = %d, from %d to %d bytes = %d\n", status, inbytes, nbytes);
+#endif
+
+					std::memcpy(mybuf.compressedbuffer + mybytes, &nbytes, sizeof(nbytes));
+					mybytes += sizeof(nbytes);
+					std::memcpy(mybuf.compressedbuffer + mybytes, compressor.compressed_data(), sizeof(unsigned char) * nbytes);
+
+// adding zfp gpu library 
+#elif defined(_USE_ZFP_GPU_)
+					/////////////////
+					printf("********** HELLO FROM ZFP GPU **********\n");
+					/////////////////
+					// Need to change the following code to use the gpu version of zfp
+
+					const int inbytes = TBlock::sizeX * TBlock::sizeY * TBlock::sizeZ * sizeof(Real);
+					int nbytes;
+
+					double zfp_acc = this->threshold;
+					int is_float = (sizeof(Real)==4)? 1 : 0;
+					int layout[4] = {_BLOCKSIZE_, _BLOCKSIZE_, _BLOCKSIZE_, 1};
+					size_t nbytes_zfp;
+					// int status = zfp_compress_buffer(mysoabuffer, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), &nbytes_zfp);
+					// int status = 0;  //just to be able to compile the file
+					int status = zfp_compress_buffer(); //just to test if the header is included correctly
+					exit(1);
+					nbytes = nbytes_zfp;
+#if VERBOSE
+					printf("zfp_gpu_compress status = %d, from %d to %d bytes = %d\n", status, inbytes, nbytes);
 #endif
 
 					std::memcpy(mybuf.compressedbuffer + mybytes, &nbytes, sizeof(nbytes));
