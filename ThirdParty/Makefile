@@ -29,13 +29,7 @@ zlib:
 	$(MAKE) -C zlib/
 
 zfp_gpu:
-	mkdir -p zfp_gpu/zfp/builds/build_gpu
-	cd zfp_gpu/zfp/builds/build_gpu && \
-	cmake -DZFP_LIBRARY_PREFIX=gpu -DBUILD_EXAMPLES=OFF -DZFP_WITH_CUDA=ON ../.. && \
-	cmake --build . --config Release
-	mkdir -p build/lib build/include
-	cp -r zfp_gpu/zfp/builds/build_gpu/lib/* build/lib/
-	cp -r zfp_gpu/zfp/include/* build/include/
+	$(MAKE) -C zfp_gpu/
 
 
 clean:
@@ -45,4 +39,5 @@ clean:
 	$(MAKE) -C zfp/ clean
 	$(MAKE) -C zlib/ clean
 	$(MAKE) -C SZ/ clean
-	rm -rf zfp_gpu/zfp/builds/build_gpu  
+	$(MAKE) -C zfp_gpu/ clean
+

@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/zfpcmd.dir/zfp.c.o -o ../bin/zfp  -Wl,-rpath,/home/gskondras/GPUbismZ/ThirdParty/zfp_gpu/zfp/builds/build_gpu/lib: ../lib/libgpuzfp.so.1.0.1 -lm 
