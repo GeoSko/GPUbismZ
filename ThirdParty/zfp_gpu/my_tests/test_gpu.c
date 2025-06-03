@@ -11,8 +11,8 @@
 #include <cuda_runtime_api.h>
 
 
-#define MAX_N 1600
-#define MIN_N 100  
+#define MAX_N 1000
+#define MIN_N 1000  
 #define STEP_N 100
 
 
@@ -125,10 +125,10 @@ void decompress(zfp_stream* zfp, zfp_field* field, size_t zfpsize, long unsigned
 {
   double start,end, diff;
 
-  if (zfp_stream_set_execution(zfp, zfp_exec_serial)){
-    fprintf(stderr, "\nSerial ok\n");
+  if (zfp_stream_set_execution(zfp, zfp_exec_cuda)){
+    fprintf(stderr, "\nCUDA ok\n");
   }else{
-    fprintf(stderr, "\nSerial not ok\n");
+    fprintf(stderr, "\nCUDA not ok\n");
   }
 
   fprintf(stderr, "Decompressing\n");
@@ -159,7 +159,7 @@ void decompress(zfp_stream* zfp, zfp_field* field, size_t zfpsize, long unsigned
   }
   end = omp_get_wtime(); 
   diff = end-start;
-  printf ("Serial decompression time: %.5lf seconds to run.\n", diff );
+  printf ("GPU decompression time: %.5lf seconds to run.\n", diff );
   long unsigned int uncompressed_size=nx*ny*nz*sizeof(double);
   fprintf(stderr, "\nUncompressed size: %ld bytes\n",uncompressed_size);
   fprintf(stderr, "Compressed storage:%ld bytes\n", zfpsize);
@@ -196,7 +196,7 @@ int main(int argc, char* argv[])
   size_t zfpsize;    /* byte size of compressed stream */
 
   double tolerance = 1e-3;
-  double rate = 2;
+  double rate = 5;
 
 
   for(n=MIN_N; n<=MAX_N; n+=STEP_N){
@@ -243,6 +243,7 @@ int main(int argc, char* argv[])
     zfp_stream_set_bit_stream(zfp, stream);
     zfp_stream_rewind(zfp);
     decompress(zfp, field, zfpsize, n, n ,n);
+    // print_array(array_recon, n, n, n);
     validate(array, array_recon, n, n, n);
     free(array);
     free(array_recon);

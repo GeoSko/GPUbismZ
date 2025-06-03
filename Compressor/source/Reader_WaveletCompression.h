@@ -361,6 +361,10 @@ public:
 				MYASSERT(buf == std::string("zfp"),
 						"\nATTENZIONE:\nWavelets in the file is " << buf <<
 						" and i have " << "zfp"  << "\n");
+#elif defined(_USE_ZFP_GPU_)
+				MYASSERT(buf == std::string("zfp_gpu"),
+						"\nATTENZIONE:\nWavelets in the file is " << buf <<
+						" and i have " << "zfp_gpu"  << "\n");
 #elif defined(_USE_SZ_)
 				MYASSERT(buf == std::string("sz"),
 						"\nATTENZIONE:\nWavelets in the file is " << buf <<
@@ -711,6 +715,21 @@ public:
 			size_t zfp_decompressedbytes;
 
 			int status = zfp_decompress_buffer(MYBLOCK, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), nbytes, &zfp_decompressedbytes);
+			if ((status < 0)||(zfp_decompressedbytes != ((_BLOCKSIZE_)*(_BLOCKSIZE_)*(_BLOCKSIZE_)*sizeof(Real))))
+			{
+				printf("ZFP DECOMPRESSION FAILURE:  %ld!!\n", zfp_decompressedbytes);
+				abort();
+			}
+
+#elif defined(_USE_ZFP_GPU_)
+			double zfp_acc = (double)this->threshold;
+			int layout[4] = {_BLOCKSIZE_, _BLOCKSIZE_, _BLOCKSIZE_, 1};
+			int is_float = (sizeof(Real)==4)?1:0;
+			size_t zfp_decompressedbytes;
+
+			int status = zfp_gpu_decompress_buffer(MYBLOCK, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), nbytes, &zfp_decompressedbytes);
+			
+
 			if ((status < 0)||(zfp_decompressedbytes != ((_BLOCKSIZE_)*(_BLOCKSIZE_)*(_BLOCKSIZE_)*sizeof(Real))))
 			{
 				printf("ZFP DECOMPRESSION FAILURE:  %ld!!\n", zfp_decompressedbytes);

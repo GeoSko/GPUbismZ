@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 
+# for static library
+# set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
+
+
 # Enable MACOSX_RPATH by default
 cmake_policy(SET CMP0042 NEW)
 

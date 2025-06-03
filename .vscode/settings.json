@@ -64,6 +64,8 @@
         "cfenv": "cpp",
         "typeinfo": "cpp",
         "semaphore": "cpp",
-        "__nullptr": "cpp"
+        "__nullptr": "cpp",
+        "string.h": "c",
+        "zfp.h": "c"
     }
 }

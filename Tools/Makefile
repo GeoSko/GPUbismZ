@@ -47,7 +47,9 @@ endif
 
 ifeq "$(zfp_gpu)" "1"
 	CUBISMZFLAGS += -D_USE_ZFP_GPU_  -I../ThirdParty/build/include/zfp_gpu
-	CUBISMZLIBS += -lgpuzfp
+	# CUBISMZLIBS += -lgpuzfp
+	CUBISMZLIBS += -Wl,-rpath,'$$ORIGIN/../../../ThirdParty/build/lib' -lgpuzfp
+
 endif
 
 ifeq "$(sz)" "1"

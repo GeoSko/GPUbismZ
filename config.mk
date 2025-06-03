@@ -47,18 +47,30 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 
 CUBISMZFLAGS += $(extra)
 
-###############################################################################
+# ###############################################################################
 # Main rules
 all: tools
 
 tools: thirdparty-libs tools-only
 
-tools-only:
+tools-only: default-tool wavz-zlib-tool fpzip-tool zfp-tool zfp-gpu-tool sz-tool
+
+default-tool:
 	$(MAKE) -C Tools/ install dir=default
+
+wavz-zlib-tool:
 	$(MAKE) -C Tools/ install dir=wavz_zlib wavz=1 zlib=1
+
+fpzip-tool:
 	$(MAKE) -C Tools/ install dir=fpzip fpzip=1
+
+zfp-tool:
 	$(MAKE) -C Tools/ install dir=zfp zfp=1
+
+zfp-gpu-tool:
 	$(MAKE) -C Tools/ install dir=zfp_gpu zfp_gpu=1
+
+sz-tool:
 	$(MAKE) -C Tools/ install dir=sz sz=1
 
 tools-custom:
@@ -70,3 +82,27 @@ thirdparty-libs:
 clean:
 	$(MAKE) -C Tools/ clean
 	$(MAKE) -C ThirdParty/ clean
+
+
+# # Main rules
+# all: tools
+
+# tools: thirdparty-libs tools-only
+
+# tools-only:
+# 	$(MAKE) -C Tools/ install dir=default
+# 	$(MAKE) -C Tools/ install dir=wavz_zlib wavz=1 zlib=1
+# 	$(MAKE) -C Tools/ install dir=fpzip fpzip=1
+# 	$(MAKE) -C Tools/ install dir=zfp zfp=1
+# 	$(MAKE) -C Tools/ install dir=zfp_gpu zfp_gpu=1
+# 	$(MAKE) -C Tools/ install dir=sz sz=1
+
+# tools-custom:
+# 	$(MAKE) -C Tools/ install
+
+# thirdparty-libs:
+# 	$(MAKE) -C ThirdParty/
+
+# clean:
+# 	$(MAKE) -C Tools/ clean
+# 	$(MAKE) -C ThirdParty/ clean

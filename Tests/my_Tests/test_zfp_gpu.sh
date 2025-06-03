@@ -37,7 +37,7 @@ nb=$(echo "$ds/$bs" | bc)
 
 rm -f tmp.cz
 
-# check if reference file exists, create it otherwise
+check if reference file exists, create it otherwise
 if [ ! -f ref.cz ]
 then
     ./genref.sh
@@ -45,7 +45,29 @@ fi
 
 export OMP_NUM_THREADS=$nproc
 # mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
-mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
+# mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
+mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
+mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
+mpirun -n $nproc ../../Tools/bin/zfp_gpu/cz2diff -czfile1 compressed.cz  -czfile2 ref.cz
+h5diff -r -p 0.005 $h5file recon.h5
 
 
-# mpirun -n $nproc ../../Tools/bin/zfp/cz2diff -czfile1 tmp.cz  -czfile2 ref.cz
+
+# This is to test the cpu one
+# mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
+
+# mpirun -n 1 ../../Tools/bin/zfp/cz2hdf -czfile tmp.cz -h5file recon
+
+# h5diff -r -p 0.015 $h5file recon.h5
+
+
+# This is to test the gpu one
+# mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
+
+# mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
+
+# # h5diff -r -p 0.015 $h5file recon.h5
+# h5diff -p 0.015 $h5file recon.h5
+
+
+

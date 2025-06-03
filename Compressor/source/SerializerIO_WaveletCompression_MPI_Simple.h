@@ -281,9 +281,8 @@ protected:
 // adding zfp gpu library 
 #elif defined(_USE_ZFP_GPU_)
 					/////////////////
-					printf("********** HELLO FROM ZFP GPU **********\n");
+					// printf("********** HELLO FROM ZFP GPU **********\n");
 					/////////////////
-					// Need to change the following code to use the gpu version of zfp
 
 					const int inbytes = TBlock::sizeX * TBlock::sizeY * TBlock::sizeZ * sizeof(Real);
 					int nbytes;
@@ -292,10 +291,7 @@ protected:
 					int is_float = (sizeof(Real)==4)? 1 : 0;
 					int layout[4] = {_BLOCKSIZE_, _BLOCKSIZE_, _BLOCKSIZE_, 1};
 					size_t nbytes_zfp;
-					// int status = zfp_compress_buffer(mysoabuffer, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), &nbytes_zfp);
-					// int status = 0;  //just to be able to compile the file
-					int status = zfp_compress_buffer(); //just to test if the header is included correctly
-					exit(1);
+					int status = zfp_gpu_compress_buffer(mysoabuffer, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), &nbytes_zfp);
 					nbytes = nbytes_zfp;
 #if VERBOSE
 					printf("zfp_gpu_compress status = %d, from %d to %d bytes = %d\n", status, inbytes, nbytes);
@@ -572,6 +568,8 @@ protected:
 				ss << "Wavelets: " << "fpzip" << "\n";
 #elif defined(_USE_ZFP_)
 				ss << "Wavelets: " << "zfp" << "\n";
+#elif defined(_USE_ZFP_GPU_)
+				ss << "Wavelets: " << "zfp_gpu" << "\n";				
 #elif defined(_USE_SZ_)
 				ss << "Wavelets: " << "sz" << "\n";
 #else
