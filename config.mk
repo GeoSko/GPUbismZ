@@ -33,7 +33,8 @@ ifeq "$(omp)" "1"
 	endif
 endif
 
-CUBISMZFLAGS += -D_BLOCKSIZE_=$(blocksize) -D_BLOCKSIZEX_=$(blocksize) -D_BLOCKSIZEY_=$(blocksize) -D_BLOCKSIZEZ_=$(blocksize)
+# CUBISMZFLAGS += -D_BLOCKSIZE_=$(blocksize) -D_BLOCKSIZEX_=$(blocksize) -D_BLOCKSIZEY_=$(blocksize) -D_BLOCKSIZEZ_=$(blocksize)
+BLOCKSIZE_FLAGS = -D_BLOCKSIZE_=$(blocksize) -D_BLOCKSIZEX_=$(blocksize) -D_BLOCKSIZEY_=$(blocksize) -D_BLOCKSIZEZ_=$(blocksize)
 CUBISMZFLAGS += -I../Compressor/Cubism/source/ -I../Compressor/source/
 
 CUBISMZFLAGS += -I$(hdf-incdir) -D_USE_HDF_
@@ -46,6 +47,8 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 
 
 CUBISMZFLAGS += $(extra)
+CUBISMZFLAGS += $(BLOCKSIZE_FLAGS)
+zfp-gpu-tool: blocksize := 128
 
 # ###############################################################################
 # Main rules

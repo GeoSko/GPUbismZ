@@ -3,6 +3,10 @@
 #pragma once
 #include<stdio.h>
 #include "zfp.h"
+#include <cuda_runtime_api.h>
+
+#define CUDA_DEVICE 1
+
 
 
 // mabe need to change nx,ny,nz to long unsigned int for large arrays
@@ -16,6 +20,9 @@ static int zfp_gpu_compress_buffer(void* array, int nx, int ny, int nz, double t
     size_t bufsize;    /* byte size of compressed buffer */
     bitstream* stream; /* bit stream to write to or read from */
     size_t zfpsize;    /* byte size of compressed stream */
+
+    cudaSetDevice(CUDA_DEVICE);
+    // printf("Hello\n");
 
     /* allocate meta data for the 3D array a[nz][ny][nx] */
     if (!is_float) {

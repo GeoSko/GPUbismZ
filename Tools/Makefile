@@ -13,6 +13,10 @@ SHELL := /bin/bash
 dir ?= default
 needs_lz ?= 1
 
+# for debugging
+# CUBISMZFLAGS += -g -O0
+
+
 # options for the first compression stage (floating point)
 wavz ?= 0
 fpzip ?= 0
@@ -48,7 +52,7 @@ endif
 ifeq "$(zfp_gpu)" "1"
 	CUBISMZFLAGS += -D_USE_ZFP_GPU_  -I../ThirdParty/build/include/zfp_gpu
 	# CUBISMZLIBS += -lgpuzfp
-	CUBISMZLIBS += -Wl,-rpath,'$$ORIGIN/../../../ThirdParty/build/lib' -lgpuzfp
+	CUBISMZLIBS += -Wl,-rpath,'$$ORIGIN/../../../ThirdParty/build/lib' -lgpuzfp -lcudart
 
 endif
 
