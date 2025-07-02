@@ -5,7 +5,7 @@
 #include "zfp.h"
 #include <cuda_runtime_api.h>
 
-#define CUDA_DEVICE 1
+#define CUDA_DEVICE 4
 
 
 
@@ -90,6 +90,8 @@ static int zfp_gpu_decompress_buffer(void* array, int nx, int ny, int nz, double
     size_t bufsize;    /* byte size of compressed buffer */
     bitstream* stream; /* bit stream to write to or read from */
     size_t zfpsize;    /* byte size of compressed stream */
+
+    cudaSetDevice(CUDA_DEVICE);
 
     /* allocate meta data for the 3D array a[nz][ny][nx] */
     if (!is_float) {

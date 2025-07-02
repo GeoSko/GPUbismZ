@@ -18,7 +18,7 @@ hdf-libdir ?= /usr/lib/x86_64-linux-gnu  # ubuntu linux
 hdf-libs ?= -lhdf5_openmpi
 
 # general software configuration options
-blocksize ?= 64
+blocksize ?= 32
 precision ?= float
 omp ?= 1
 
