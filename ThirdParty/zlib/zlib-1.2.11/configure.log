@@ -13994,3 +13994,1573 @@ uname = Linux
 --------------------
 
 
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Wed Jul  2 18:05:19 EEST 2025
+=== ztest565220.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest565220.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest565220.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest565220.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest565220.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest565220.c
+Checking for size_t... Yes.
+
+
+=== ztest565220.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest565220.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest565220 ztest565220.c
+Checking for strerror... Yes.
+
+=== ztest565220.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking for unistd.h... Yes.
+
+=== ztest565220.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking for stdarg.h... Yes.
+
+=== ztest565220.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest565220.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest565220 ztest565220.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest565220.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest565220.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest565220.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 20:16:56 EEST 2025
+=== ztest1377241.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest1377241.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest1377241.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest1377241.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest1377241.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest1377241.c
+Checking for size_t... Yes.
+
+
+=== ztest1377241.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest1377241.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1377241 ztest1377241.c
+Checking for strerror... Yes.
+
+=== ztest1377241.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking for unistd.h... Yes.
+
+=== ztest1377241.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking for stdarg.h... Yes.
+
+=== ztest1377241.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest1377241.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1377241 ztest1377241.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest1377241.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest1377241.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1377241.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 21:30:20 EEST 2025
+=== ztest1629666.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest1629666.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest1629666.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest1629666.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest1629666.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest1629666.c
+Checking for size_t... Yes.
+
+
+=== ztest1629666.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest1629666.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1629666 ztest1629666.c
+Checking for strerror... Yes.
+
+=== ztest1629666.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking for unistd.h... Yes.
+
+=== ztest1629666.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking for stdarg.h... Yes.
+
+=== ztest1629666.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest1629666.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1629666 ztest1629666.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest1629666.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest1629666.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1629666.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 22:46:56 EEST 2025
+=== ztest1886253.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest1886253.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest1886253.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest1886253.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest1886253.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest1886253.c
+Checking for size_t... Yes.
+
+
+=== ztest1886253.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest1886253.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1886253 ztest1886253.c
+Checking for strerror... Yes.
+
+=== ztest1886253.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking for unistd.h... Yes.
+
+=== ztest1886253.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking for stdarg.h... Yes.
+
+=== ztest1886253.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest1886253.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest1886253 ztest1886253.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest1886253.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest1886253.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest1886253.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:37:46 EEST 2025
+=== ztest2038014.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2038014.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2038014.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2038014.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2038014.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2038014.c
+Checking for size_t... Yes.
+
+
+=== ztest2038014.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2038014.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2038014 ztest2038014.c
+Checking for strerror... Yes.
+
+=== ztest2038014.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking for unistd.h... Yes.
+
+=== ztest2038014.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking for stdarg.h... Yes.
+
+=== ztest2038014.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2038014.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2038014 ztest2038014.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2038014.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2038014.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2038014.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:38:30 EEST 2025
+=== ztest2042937.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2042937.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2042937.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2042937.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2042937.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2042937.c
+Checking for size_t... Yes.
+
+
+=== ztest2042937.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2042937.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2042937 ztest2042937.c
+Checking for strerror... Yes.
+
+=== ztest2042937.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking for unistd.h... Yes.
+
+=== ztest2042937.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking for stdarg.h... Yes.
+
+=== ztest2042937.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2042937.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2042937 ztest2042937.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2042937.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2042937.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2042937.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:40:34 EEST 2025
+=== ztest2052020.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2052020.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2052020.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2052020.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2052020.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2052020.c
+Checking for size_t... Yes.
+
+
+=== ztest2052020.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2052020.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2052020 ztest2052020.c
+Checking for strerror... Yes.
+
+=== ztest2052020.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking for unistd.h... Yes.
+
+=== ztest2052020.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking for stdarg.h... Yes.
+
+=== ztest2052020.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2052020.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2052020 ztest2052020.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2052020.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2052020.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2052020.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:41:15 EEST 2025
+=== ztest2056654.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2056654.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2056654.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2056654.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2056654.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2056654.c
+Checking for size_t... Yes.
+
+
+=== ztest2056654.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2056654.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2056654 ztest2056654.c
+Checking for strerror... Yes.
+
+=== ztest2056654.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking for unistd.h... Yes.
+
+=== ztest2056654.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking for stdarg.h... Yes.
+
+=== ztest2056654.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2056654.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2056654 ztest2056654.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2056654.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2056654.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2056654.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:42:23 EEST 2025
+=== ztest2062855.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2062855.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2062855.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2062855.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2062855.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2062855.c
+Checking for size_t... Yes.
+
+
+=== ztest2062855.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2062855.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2062855 ztest2062855.c
+Checking for strerror... Yes.
+
+=== ztest2062855.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking for unistd.h... Yes.
+
+=== ztest2062855.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking for stdarg.h... Yes.
+
+=== ztest2062855.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2062855.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2062855 ztest2062855.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2062855.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2062855.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2062855.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+
+--------------------
+./configure --prefix=/home/gskondras/GPUbismZ/ThirdParty/zlib/../build --static
+Sun Jul  6 23:49:47 EEST 2025
+=== ztest2087415.c ===
+extern int getchar();
+int hello() {return getchar();}
+===
+mpicc -c ztest2087415.c
+... using gcc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2087415.c ===
+int foo() { return 0; }
+===
+mpicc -c -O3 ztest2087415.c
+
+Building static library libz.a version 1.2.11 with mpicc.
+
+=== ztest2087415.c ===
+#include <stdio.h>
+#include <stdlib.h>
+size_t dummy = 0;
+===
+mpicc -c -O3 ztest2087415.c
+Checking for size_t... Yes.
+
+
+=== ztest2087415.c ===
+#include <sys/types.h>
+off64_t dummy = 0;
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+
+=== ztest2087415.c ===
+#include <string.h>
+#include <errno.h>
+int main() { return strlen(strerror(errno)); }
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2087415 ztest2087415.c
+Checking for strerror... Yes.
+
+=== ztest2087415.c ===
+#include <unistd.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking for unistd.h... Yes.
+
+=== ztest2087415.c ===
+#include <stdarg.h>
+int main() { return 0; }
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking for stdarg.h... Yes.
+
+=== ztest2087415.c ===
+#include <stdio.h>
+#include <stdarg.h>
+#include "zconf.h"
+int main()
+{
+#ifndef STDC
+  choke me
+#endif
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+
+=== ztest2087415.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return 0;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -O3 -D_LARGEFILE64_SOURCE=1 -o ztest2087415 ztest2087415.c
+Checking for vsnprintf() in stdio.h... Yes.
+
+=== ztest2087415.c ===
+#include <stdio.h>
+#include <stdarg.h>
+int mytest(const char *fmt, ...)
+{
+  int n;
+  char buf[20];
+  va_list ap;
+  va_start(ap, fmt);
+  n = vsnprintf(buf, sizeof(buf), fmt, ap);
+  va_end(ap);
+  return n;
+}
+int main()
+{
+  return (mytest("Hello%d\n", 1));
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking for return value of vsnprintf()... Yes.
+
+=== ztest2087415.c ===
+#define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
+int ZLIB_INTERNAL foo;
+int main()
+{
+  return 0;
+}
+===
+mpicc -c -O3 -D_LARGEFILE64_SOURCE=1 ztest2087415.c
+Checking for attribute(visibility) support... Yes.
+
+ALL = static all64
+AR = ar
+ARFLAGS = rc
+CC = mpicc
+CFLAGS = -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+CPP = mpicc -E
+EXE =
+LDCONFIG = ldconfig
+LDFLAGS =
+LDSHARED = mpicc
+LDSHAREDLIBC = -lc
+OBJC = $(OBJZ) $(OBJG)
+PIC_OBJC = $(PIC_OBJZ) $(PIC_OBJG)
+RANLIB = ranlib
+SFLAGS = -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
+SHAREDLIB =
+SHAREDLIBM =
+SHAREDLIBV =
+STATICLIB = libz.a
+TEST = all teststatic test64
+VER = 1.2.11
+Z_U4 =
+SRCDIR =
+exec_prefix = ${prefix}
+includedir = ${prefix}/include
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/share/man
+prefix = /home/gskondras/GPUbismZ/ThirdParty/zlib/../build
+sharedlibdir = ${libdir}
+uname = Linux
+--------------------
+
+

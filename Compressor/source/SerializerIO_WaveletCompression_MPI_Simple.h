@@ -33,6 +33,8 @@ static int omp_get_thread_num(void) { return 0; }
 #include "Timer.h"
 #include "BlockInfo.h"
 
+#include <memory>	//for smart pointers
+
 #include "FullWaveletTransform.h"
 #include "WaveletCompressor.h"
 #include "WaveletSerializationTypes.h"
@@ -81,10 +83,16 @@ protected:
 	  ALERT = (ENTRIES - 1) * ENTRYSIZE
 	};
 
+	static constexpr size_t _BUFFERSIZE = ENTRIES * ENTRYSIZE; //to avoid int overflow
+
 	struct CompressionBuffer
 	{
 	  BlockMetadata hotblocks[ENTRIES];
-	  unsigned char compressedbuffer[2*BUFFERSIZE];
+	  #if defined(_USE_ZFP_GPU_)
+	  	unsigned char compressedbuffer[2*_BUFFERSIZE];
+	  #else
+	  	unsigned char compressedbuffer[2*BUFFERSIZE];
+	  #endif
 	};
 
 	struct TimingInfo { float total, fwt, encoding; };
@@ -219,9 +227,18 @@ protected:
 				{
 					TBlock& b = *(TBlock*)vInfo[i].ptrBlock;
 
+					#if defined(_USE_ZFP_GPU_)
+					auto compressor = std::make_unique<WaveletCompressor>(); //heap allocation needed for compressing big blocks in gpu without stack overflow
+					#else
 					WaveletCompressor compressor;
+					#endif
 
-					Real * const mysoabuffer = &compressor.uncompressed_data()[0][0][0];
+					#if defined(_USE_ZFP_GPU_)
+						Real * const mysoabuffer = &compressor->uncompressed_data()[0][0][0];
+					#else
+						Real * const mysoabuffer = &compressor.uncompressed_data()[0][0][0]; //don't want to change the cpu implementation
+					#endif
+
 					if(streamer.name() == "StreamerGridPointIterative")
 					{
 					for(int iz=0; iz<TBlock::sizeZ; iz++)
@@ -291,7 +308,7 @@ protected:
 					int is_float = (sizeof(Real)==4)? 1 : 0;
 					int layout[4] = {_BLOCKSIZE_, _BLOCKSIZE_, _BLOCKSIZE_, 1};
 					size_t nbytes_zfp;
-					int status = zfp_gpu_compress_buffer(mysoabuffer, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), &nbytes_zfp);
+					int status = zfp_gpu_compress_buffer(mysoabuffer, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor->compressed_data(), &nbytes_zfp);
 					nbytes = nbytes_zfp;
 #if VERBOSE
 					printf("zfp_gpu_compress status = %d, from %d to %d bytes = %d\n", status, inbytes, nbytes);
@@ -299,7 +316,7 @@ protected:
 
 					std::memcpy(mybuf.compressedbuffer + mybytes, &nbytes, sizeof(nbytes));
 					mybytes += sizeof(nbytes);
-					std::memcpy(mybuf.compressedbuffer + mybytes, compressor.compressed_data(), sizeof(unsigned char) * nbytes);
+					std::memcpy(mybuf.compressedbuffer + mybytes, compressor->compressed_data(), sizeof(unsigned char) * nbytes);
 
 #elif defined(_USE_SZ_)
 					const int inbytes = TBlock::sizeX * TBlock::sizeY * TBlock::sizeZ * sizeof(Real);

@@ -32,7 +32,7 @@ then
     nproc=$1; shift
 fi
 
-bs=64
+bs=256
 ds=512
 nb=$(echo "$ds/$bs" | bc)
 

@@ -18,6 +18,7 @@
 #include "FullWaveletTransform.h"
 
 #include <zlib.h> // always needed
+#include <iostream>
 
 #if defined(_USE_LZ4_)
 #include <lz4.h>

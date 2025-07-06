@@ -11,6 +11,7 @@
 MPICXX ?= mpic++
 MPICC ?= mpicc
 config ?= release
+# config ?= debug
 hdf-incdir ?= /usr/include/hdf5/openmpi  # ubuntu linux
 hdf-libdir ?= /usr/lib/x86_64-linux-gnu  # ubuntu linux
 #hdf-incdir ?= $(HDF5_ROOT)/include
@@ -20,7 +21,7 @@ hdf-libs ?= -lhdf5_openmpi
 # general software configuration options
 blocksize ?= 32
 precision ?= float
-omp ?= 1
+omp ?= 0
 
 # options for the first compression stage (floating point)
 # wavz                     (to enable wavz=1)

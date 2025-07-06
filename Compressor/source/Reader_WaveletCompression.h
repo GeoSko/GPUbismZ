@@ -582,7 +582,7 @@ public:
 
 		assert(!feof(f));
 
-		static std::vector<unsigned char> waveletbuf(2 << 22); // 21: 4MB, 22: 8MB, 28: 512MB
+		static std::vector<unsigned char> waveletbuf(2 << 29); // 21: 4MB, 22: 8MB, 28: 512MB
 		const size_t decompressedbytes = zdecompress(&compressedbuf.front(), compressedbuf.size(), &waveletbuf.front(), waveletbuf.size());
 
 		int readbytes = 0;
@@ -676,7 +676,11 @@ public:
 #if defined(VERBOSE)
 			printf("wavelet decompressing %d bytes...\n", nbytes);
 #endif
+			#if defined(_USE_ZFP_GPU_)
+			auto compressor = std::make_unique<WaveletCompressor>(); //heap allocation needed for compressing big blocks in gpu without stack overflow
+			#else
 			WaveletCompressor compressor;
+			#endif
 
 			{ // swapping
 			enum
@@ -689,7 +693,11 @@ public:
 			for (int i = BITSETSIZE; i < nbytes; i+=4)
 				swapbytes(buf+i, 4);
 			}
+			#if defined(_USE_ZFP_GPU_)
+			std::memcpy(compressor->compressed_data(), &waveletbuf[readbytes], nbytes);
+			#else
 			std::memcpy(compressor.compressed_data(), &waveletbuf[readbytes], nbytes);
+			#endif
 			readbytes += nbytes;
 
 #if defined(_USE_WAVZ_)
@@ -727,7 +735,7 @@ public:
 			int is_float = (sizeof(Real)==4)?1:0;
 			size_t zfp_decompressedbytes;
 
-			int status = zfp_gpu_decompress_buffer(MYBLOCK, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor.compressed_data(), nbytes, &zfp_decompressedbytes);
+			int status = zfp_gpu_decompress_buffer(MYBLOCK, layout[0], layout[1], layout[2], zfp_acc, is_float, (unsigned char *)compressor->compressed_data(), nbytes, &zfp_decompressedbytes);
 			
 
 			if ((status < 0)||(zfp_decompressedbytes != ((_BLOCKSIZE_)*(_BLOCKSIZE_)*(_BLOCKSIZE_)*sizeof(Real))))
