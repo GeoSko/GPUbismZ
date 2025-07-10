@@ -5,7 +5,7 @@
 #include "zfp.h"
 #include <cuda_runtime_api.h>
 
-#define CUDA_DEVICE 1
+#define CUDA_DEVICE 0
 
 
 

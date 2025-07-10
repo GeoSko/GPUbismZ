@@ -9,6 +9,8 @@
 #
 set -x #echo on
 
+rm compressed.cz recon.h5 recon.xmf
+
 # [[ ! -f ../Data/demo.h5 ]] && tar -C ../Data -xJf ../Data/data.tar.xz
 # h5file=../Data/demo.h5
 h5file=../Data/data_005000-p.h5
@@ -32,7 +34,7 @@ then
     nproc=$1; shift
 fi
 
-bs=256
+bs=512
 ds=512
 nb=$(echo "$ds/$bs" | bc)
 

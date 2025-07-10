@@ -7,6 +7,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+
+ //  File modified by Georgios Skondras
+
+
 #ifndef READER_WAVELETCOMPRESSION_H_
 #define READER_WAVELETCOMPRESSION_H_ 1
 
@@ -20,10 +25,15 @@
 #include <sys/stat.h>
 #include <vector>
 
+#define VERBOSE 0
+
+
 #ifdef _FLOAT_PRECISION_
 typedef float Real;
+#define REAL_SIZE 4
 #else
 typedef double Real;
+#define REAL_SIZE 8
 #endif
 
 #include "../../Compressor/source/WaveletCompressor.h"
@@ -582,7 +592,7 @@ public:
 
 		assert(!feof(f));
 
-		static std::vector<unsigned char> waveletbuf(2 << 29); // 21: 4MB, 22: 8MB, 28: 512MB
+		static std::vector<unsigned char> waveletbuf(2 << 22); // 21: 4MB, 22: 8MB, 28: 512MB
 		const size_t decompressedbytes = zdecompress(&compressedbuf.front(), compressedbuf.size(), &waveletbuf.front(), waveletbuf.size());
 
 		int readbytes = 0;
@@ -651,7 +661,13 @@ public:
 		assert(!feof(f));
 
 		size_t zz_bytes = compressedbuf.size();
-		static std::vector<unsigned char> waveletbuf(2 << 22); // 21: 4MB, 22: 8MB, 28: 512MB
+
+		#if defined(_USE_ZFP_GPU_)
+			size_t gpu_buffer_size = _BLOCKSIZE_ * _BLOCKSIZE_ * _BLOCKSIZE_ * REAL_SIZE;
+			static std::vector<unsigned char> waveletbuf(gpu_buffer_size); // for gpu the buffer size is calculated by the block size
+		#else
+			static std::vector<unsigned char> waveletbuf(2 << 22); // 21: 4MB, 22: 8MB, 28: 512MB
+		#endif 
 		const size_t decompressedbytes = zdecompress(&compressedbuf.front(), compressedbuf.size(), &waveletbuf.front(), waveletbuf.size());
 		zratio1 = (1.0*decompressedbytes)/zz_bytes;
 #if defined(VERBOSE)

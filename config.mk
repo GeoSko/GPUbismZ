@@ -25,7 +25,9 @@ ifeq "$(config)" "release"
 	CUBISMZFLAGS += -DNDEBUG -O3
 else
 	# CUBISMZFLAGS += -g
-	CUBISMZFLAGS += -fsanitize=address -fno-omit-frame-pointer -O1 -g
+	# CUBISMZFLAGS += -fsanitize=address -fno-omit-frame-pointer -O1 -g
+	CUBISMZFLAGS += -O0 -g
+
 endif
 
 ifeq "$(omp)" "1"
@@ -49,7 +51,7 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 
 CUBISMZFLAGS += $(extra)
 CUBISMZFLAGS += $(BLOCKSIZE_FLAGS)
-zfp-gpu-tool: blocksize := 256
+zfp-gpu-tool: blocksize := 512
 
 # ###############################################################################
 # Main rules
