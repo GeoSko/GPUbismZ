@@ -34,7 +34,7 @@ then
     nproc=$1; shift
 fi
 
-bs=512
+bs=256
 ds=512
 nb=$(echo "$ds/$bs" | bc)
 
@@ -50,9 +50,11 @@ export OMP_NUM_THREADS=$nproc
 # mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
 # mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
 
+mpi_procs=2
+bpdx=$(( nb / mpi_procs ))
 
-mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
-mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
+mpirun -n $mpi_procs ../../Tools/bin/zfp_gpu/hdf2cz -nprocx $mpi_procs -nprocy 1 -nprocz 1 -bpdx $bpdx -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
+mpirun -n 2 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
 # mpirun -n $nproc ../../Tools/bin/zfp_gpu/cz2diff -czfile1 compressed.cz  -czfile2 ref.cz
 h5diff -r -p 0.005 $h5file recon.h5
 

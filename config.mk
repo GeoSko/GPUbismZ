@@ -51,7 +51,7 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 
 CUBISMZFLAGS += $(extra)
 CUBISMZFLAGS += $(BLOCKSIZE_FLAGS)
-zfp-gpu-tool: blocksize := 512
+zfp-gpu-tool: blocksize := 256
 
 # ###############################################################################
 # Main rules

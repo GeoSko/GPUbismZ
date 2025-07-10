@@ -11,7 +11,7 @@
 
 // mabe need to change nx,ny,nz to long unsigned int for large arrays
 static int zfp_gpu_compress_buffer(void* array, int nx, int ny, int nz, double tolerance, int is_float, unsigned char *output, size_t *zbytes){
-    // printf("**********HELLO FROM ZFP GPU HEADER FILE**********\n");
+
     int status = 0;    /* return value: 0 = success */
     zfp_type type;     /* array scalar type */
     zfp_field* field;  /* array meta data */
@@ -21,8 +21,10 @@ static int zfp_gpu_compress_buffer(void* array, int nx, int ny, int nz, double t
     bitstream* stream; /* bit stream to write to or read from */
     size_t zfpsize;    /* byte size of compressed stream */
 
-    cudaSetDevice(CUDA_DEVICE);
-    // printf("Hello\n");
+    // cudaSetDevice(CUDA_DEVICE); //for single gpu
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    cudaSetDevice(rank); //gpu device selection according to mpi rank
 
     /* allocate meta data for the 3D array a[nz][ny][nx] */
     if (!is_float) {
@@ -91,7 +93,10 @@ static int zfp_gpu_decompress_buffer(void* array, int nx, int ny, int nz, double
     bitstream* stream; /* bit stream to write to or read from */
     size_t zfpsize;    /* byte size of compressed stream */
 
-    cudaSetDevice(CUDA_DEVICE);
+    // cudaSetDevice(CUDA_DEVICE); //for single gpu
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    cudaSetDevice(rank); //gpu device selection according to mpi rank
 
     /* allocate meta data for the 3D array a[nz][ny][nx] */
     if (!is_float) {
