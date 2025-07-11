@@ -52,6 +52,8 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 CUBISMZFLAGS += $(extra)
 CUBISMZFLAGS += $(BLOCKSIZE_FLAGS)
 zfp-gpu-tool: blocksize := 256
+default-gpu-tool: blocksize := 256
+
 
 # ###############################################################################
 # Main rules
@@ -59,10 +61,13 @@ all: tools
 
 tools: thirdparty-libs tools-only
 
-tools-only: default-tool wavz-zlib-tool fpzip-tool zfp-tool zfp-gpu-tool sz-tool
+tools-only: default-tool default-gpu-tool wavz-zlib-tool fpzip-tool zfp-tool zfp-gpu-tool sz-tool
 
 default-tool:
 	$(MAKE) -C Tools/ install dir=default
+
+default-gpu-tool:
+	$(MAKE) -C Tools/ install dir=default_gpu default_gpu=1
 
 wavz-zlib-tool:
 	$(MAKE) -C Tools/ install dir=wavz_zlib wavz=1 zlib=1

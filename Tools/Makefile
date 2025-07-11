@@ -16,6 +16,8 @@ needs_lz ?= 1
 # for debugging
 # CUBISMZFLAGS += -g -O0
 
+# for plain gpu reference file
+default_gpu ?= 0
 
 # options for the first compression stage (floating point)
 wavz ?= 0
@@ -23,6 +25,7 @@ fpzip ?= 0
 zfp ?= 0
 zfp_gpu ?= 0
 sz ?= 0
+
 
 # options for the second compression stage (encoding)
 zlib ?= 0
@@ -56,10 +59,21 @@ ifeq "$(zfp_gpu)" "1"
 
 endif
 
+ifeq "$(zfp_gpu)" "1"
+	CUBISMZFLAGS += -D_USE_ZFP_GPU_  -I../ThirdParty/build/include/zfp_gpu
+	# CUBISMZLIBS += -lgpuzfp
+	CUBISMZLIBS += -Wl,-rpath,'$$ORIGIN/../../../ThirdParty/build/lib' -lgpuzfp -lcudart
+
+endif
+
 ifeq "$(sz)" "1"
 	CUBISMZFLAGS += -D_USE_SZ_  -I../ThirdParty/build/include
 	CUBISMZLIBS += -lSZ  -lzlib
 	needs_lz = 0
+endif
+
+ifeq "$(default_gpu)" "1"
+	CUBISMZFLAGS += -D_DEFAULT_GPU_
 endif
 
 

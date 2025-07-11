@@ -14,7 +14,7 @@
 #include "Reader_WaveletCompression.h"
 #include <ArgumentParser.h>
 #include <GridMPI.h>
-#define VERBOSE 0
+// #define VERBOSE 0
 
 #ifdef _USE_HDF_
 #include <hdf5.h>

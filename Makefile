@@ -12,11 +12,11 @@ MPICXX ?= mpic++
 MPICC ?= mpicc
 config ?= release
 # config ?= debug
-hdf-incdir ?= /usr/include/hdf5/openmpi  # ubuntu linux
+hdf-incdir ?= /usr/include/hdf5/mpich  # ubuntu linux
 hdf-libdir ?= /usr/lib/x86_64-linux-gnu  # ubuntu linux
 #hdf-incdir ?= $(HDF5_ROOT)/include
 #hdf-libdir ?= $(HDF5_ROOT)/lib
-hdf-libs ?= -lhdf5_openmpi
+hdf-libs ?= -lhdf5_mpich
 
 # general software configuration options
 blocksize ?= 32

@@ -227,13 +227,13 @@ protected:
 				{
 					TBlock& b = *(TBlock*)vInfo[i].ptrBlock;
 
-					#if defined(_USE_ZFP_GPU_)
+					#if defined(_USE_ZFP_GPU_) || defined(_DEFAULT_GPU_)
 					auto compressor = std::make_unique<WaveletCompressor>(); //heap allocation needed for compressing big blocks in gpu without stack overflow
 					#else
 					WaveletCompressor compressor;
 					#endif
 
-					#if defined(_USE_ZFP_GPU_)
+					#if defined(_USE_ZFP_GPU_) || defined(_DEFAULT_GPU_)
 						Real * const mysoabuffer = &compressor->uncompressed_data()[0][0][0];
 					#else
 						Real * const mysoabuffer = &compressor.uncompressed_data()[0][0][0]; //don't want to change the cpu implementation

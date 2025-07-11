@@ -25,7 +25,7 @@
 #include <sys/stat.h>
 #include <vector>
 
-#define VERBOSE 0
+// #define VERBOSE 1
 
 
 #ifdef _FLOAT_PRECISION_

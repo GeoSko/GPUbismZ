@@ -9,7 +9,7 @@
 #
 set -x #echo on
 
-rm compressed.cz recon.h5 recon.xmf
+rm compressed.cz recon.h5 recon.xmf ref.cz
 
 # [[ ! -f ../Data/demo.h5 ]] && tar -C ../Data -xJf ../Data/data.tar.xz
 # h5file=../Data/demo.h5
@@ -38,7 +38,7 @@ bs=256
 ds=512
 nb=$(echo "$ds/$bs" | bc)
 
-rm -f tmp.cz
+# rm -f tmp.cz
 
 # check if reference file exists, create it otherwise
 # if [ ! -f ref.cz ]
@@ -50,31 +50,46 @@ export OMP_NUM_THREADS=$nproc
 # mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
 # mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
 
-mpi_procs=2
+mpi_procs=1
 bpdx=$(( nb / mpi_procs ))
 
+
+########## GPU ##########
+
+# compress
 mpirun -n $mpi_procs ../../Tools/bin/zfp_gpu/hdf2cz -nprocx $mpi_procs -nprocy 1 -nprocz 1 -bpdx $bpdx -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
-mpirun -n 2 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
-# mpirun -n $nproc ../../Tools/bin/zfp_gpu/cz2diff -czfile1 compressed.cz  -czfile2 ref.cz
-h5diff -r -p 0.005 $h5file recon.h5
 
 
-
-# This is to test the cpu one
-# mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile tmp.cz -threshold $err
-
-# mpirun -n 1 ../../Tools/bin/zfp/cz2hdf -czfile tmp.cz -h5file recon
-
-# h5diff -r -p 0.015 $h5file recon.h5
+# reference file
+mpirun -n 1 ../../Tools/bin/default_gpu/hdf2cz -bpdx $bpdx -bpdy $nb -bpdz $nb -h5file $h5file -czfile ref.cz
+mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2diff -czfile1 compressed.cz  -czfile2 ref.cz
 
 
-# This is to test the gpu one
-# mpirun -n 1 ../../Tools/bin/zfp_gpu/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
-
+# # file reconstruction
 # mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2hdf -czfile compressed.cz -h5file recon
+# h5diff -r -p 0.005 $h5file recon.h5
 
-# # h5diff -r -p 0.015 $h5file recon.h5
-# h5diff -p 0.015 $h5file recon.h5
+
+
+
+########## CPU ##########
+
+# bs=32
+# nb=$(echo "$ds/$bs" | bc)
+
+# # compress
+# mpirun -n 1 ../../Tools/bin/zfp/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold $err
+
+
+# # reference file
+# mpirun -n 1 ../../Tools/bin/default/hdf2cz -bpdx $nb -bpdy $nb -bpdz $nb -h5file $h5file -czfile ref.cz
+# mpirun -n 1 ../../Tools/bin/zfp/cz2diff -bpdx $nb -bpdy $nb -bpdz $nb -czfile1 compressed.cz  -czfile2 ref.cz
+
+
+# # file reconstruction
+# mpirun -n 1 ../../Tools/bin/zfp/cz2hdf -czfile compressed.cz -h5file recon
+# h5diff -r -p 0.005 $h5file recon.h5
+
 
 
 
