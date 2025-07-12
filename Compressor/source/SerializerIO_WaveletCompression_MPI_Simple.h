@@ -88,7 +88,7 @@ protected:
 	struct CompressionBuffer
 	{
 	  BlockMetadata hotblocks[ENTRIES];
-	  #if defined(_USE_ZFP_GPU_)
+	  #if defined(_USE_ZFP_GPU_) || defined(_DEFAULT_GPU_)
 	  	unsigned char compressedbuffer[2*_BUFFERSIZE];
 	  #else
 	  	unsigned char compressedbuffer[2*BUFFERSIZE];

@@ -34,7 +34,7 @@ then
     nproc=$1; shift
 fi
 
-bs=256
+bs=512
 ds=512
 nb=$(echo "$ds/$bs" | bc)
 
@@ -57,11 +57,12 @@ bpdx=$(( nb / mpi_procs ))
 ########## GPU ##########
 
 # compress
-mpirun -n $mpi_procs ../../Tools/bin/zfp_gpu/hdf2cz -nprocx $mpi_procs -nprocy 1 -nprocz 1 -bpdx $bpdx -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
+# mpirun -n $mpi_procs ../../Tools/bin/zfp_gpu/hdf2cz -nprocx $mpi_procs -nprocy 1 -nprocz 1 -bpdx $bpdx -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
+mpirun -n $mpi_procs ../../Tools/bin/zfp_gpu/hdf2cz -nprocx 1 -nprocy 1 -nprocz 1 -bpdx $nb -bpdy $nb -bpdz $nb -sim io -h5file $h5file -czfile compressed.cz -threshold 5
 
 
 # reference file
-mpirun -n 1 ../../Tools/bin/default_gpu/hdf2cz -bpdx $bpdx -bpdy $nb -bpdz $nb -h5file $h5file -czfile ref.cz
+mpirun -n 1 ../../Tools/bin/default_gpu/hdf2cz -nprocx 1 -nprocy 1 -nprocz 1 -bpdx $nb -bpdy $nb -bpdz $nb  -h5file $h5file -czfile ref.cz
 mpirun -n 1 ../../Tools/bin/zfp_gpu/cz2diff -czfile1 compressed.cz  -czfile2 ref.cz
 
 

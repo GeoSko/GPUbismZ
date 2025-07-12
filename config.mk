@@ -14,6 +14,8 @@ mpi_info = $(shell $(MPICXX) -show)
 compiler = $(notdir $(firstword $(mpi_info)))
 $(info Found [$(compiler)])
 
+gpu_block_size=512
+
 ###############################################################################
 # Compilation and linking options
 
@@ -51,8 +53,8 @@ CUBISMZLIBS += -L../ThirdParty/build/lib
 
 CUBISMZFLAGS += $(extra)
 CUBISMZFLAGS += $(BLOCKSIZE_FLAGS)
-zfp-gpu-tool: blocksize := 256
-default-gpu-tool: blocksize := 256
+zfp-gpu-tool: blocksize := $(gpu_block_size)
+default-gpu-tool: blocksize := $(gpu_block_size)
 
 
 # ###############################################################################
